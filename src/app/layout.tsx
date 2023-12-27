@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import Header from '@/components/Header'
+import { ClerkProvider } from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,9 +18,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <head />
-      <body>
+      <body className='w-screen overflow-x-hidden'>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -31,5 +33,6 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+    </ClerkProvider>
   )
 }
