@@ -23,8 +23,8 @@ export default function Home() {
           
         </div>
 
-        <div className=" h-full w-full">
-          <Image alt='seo img' layout='responsive' width={300} height={500} className=' rounded-3xl h-[500px]' src={"/have.jpg"} />
+        <div className=" max-w-3xl! w-auto ">
+          <Image alt='seo img' layout='responsive' width={300} height={300} className=' rounded-3xl' src={"/have.jpg"} />
         </div>
 
 
