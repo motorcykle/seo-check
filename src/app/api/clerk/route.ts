@@ -1,6 +1,8 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import { db } from '@/lib/db'
+import { users } from '@/lib/db/schema'
  
 export async function POST(req: Request) {
  
@@ -53,8 +55,11 @@ export async function POST(req: Request) {
  
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`)
   console.log('Webhook body:', body)
-  if (eventType === "user.created") {
-    
+  if (eventType === "user.created" && id) {
+    // have to create in db a user, and how many free uses are left
+    await db.insert(users).values({
+      userId: id
+    });
   }
  
   return new Response('', { status: 200 })
