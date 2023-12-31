@@ -57,9 +57,10 @@ export async function POST(req: Request) {
   console.log('Webhook body:', body)
   if (eventType === "user.created" && id) {
     // have to create in db a user, and how many free uses are left
-    await db.insert(users).values({
+    const res = await db.insert(users).values({
       userId: id
     });
+    console.log(res)
   }
  
   return new Response('', { status: 200 })

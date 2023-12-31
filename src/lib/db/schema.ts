@@ -34,5 +34,5 @@ export const userSubscriptions = pgTable("user_subscriptions", {
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   userId: varchar("user_id", { length: 256 }).notNull().unique(),
-  freeTries: integer("int").default(10)
+  freeTries: integer("free_tries").default(10)
 });
