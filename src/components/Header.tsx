@@ -8,13 +8,16 @@ export default function Header () {
     <nav className="mx-auto max-w-7xl p-5 flex items-center justify-between">
       <Link prefetch={false} href={"/"} className="flex items-center font-semibold text-muted-foreground text-2xl">seo-check <CheckCheck className="h-5 w-5 ml-1" /></Link>
         
-      <SignedIn>
-        <Button>Analyze SEO</Button>
-        <UserButton />
-      </SignedIn>
-
-      <section className="space-x-3">
-        <SignedOut>
+      
+        <SignedIn><section className="flex items-center space-x-3">
+          <Link href={"/analyze-seo"}>
+            <Button >Analyze SEO</Button>
+          </Link>
+          
+          <UserButton /></section>
+        </SignedIn>
+      
+        <SignedOut><section className="space-x-3">
           <SignInButton>
             <Button className="" variant={"outline"}>
               Log in 
@@ -25,11 +28,10 @@ export default function Header () {
             <Button>
               Register 
             </Button>
-          </SignUpButton>
+          </SignUpButton></section>
         </SignedOut>
-      </section>
       
-        
+      
     </nav>
   </header>
 }

@@ -6,6 +6,7 @@ import Image from 'next/image'
 export default function Home() {
   return (
     <main className='min-h-screen w-screen overflow-hidden'>
+      {/* banner */}
       <section className="relative mx-auto max-w-7xl p-5 md:flex items-center gap-10 space-y-5 md:space-y-0">
         <span className=' opacity-50 -z-10 blur-3xl absolute z- text-[240px] font-semibold -mb-3 md:text-nowrap'>
           seo check 🪇
@@ -26,14 +27,10 @@ export default function Home() {
         <div className=" max-w-3xl! w-auto ">
           <Image alt='seo img' layout='responsive' width={300} height={300} className=' rounded-3xl' src={"/have.jpg"} />
         </div>
-
-
-
       </section>
 
-      <section>
-        fwefwefwe wefwef
-      </section>
+      {/* fake info */}
+      <section className=""></section>
 
     </main>
   )
