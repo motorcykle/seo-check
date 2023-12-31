@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button'
-import { SignInButton, SignUpButton } from '@clerk/nextjs'
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs'
 import { Check } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -18,9 +19,19 @@ export default function Home() {
           </h1>
           <p className='max-w-3xl text-xl md:text-2xl text-muted-foreground font-medium'>Let's check out how SEO friendly your code is, paste your web page and let AI analyze and find room for optimization</p>
           
-          <SignUpButton>
-            <Button>Let's start! 🪇</Button>
-          </SignUpButton>
+          <section className='space-y-6'>
+            <SignedOut>
+              <SignUpButton>
+                <Button>Let's start! 🪇</Button>
+              </SignUpButton>
+            </SignedOut>
+            
+            <SignedIn>
+              <Link prefetch={false} href={"/analyze-seo"}>
+                <Button>Let's start! 🪇</Button>
+              </Link>
+            </SignedIn>
+          </section>
           
         </div>
 

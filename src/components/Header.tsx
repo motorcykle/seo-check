@@ -10,11 +10,11 @@ export default function Header () {
         
       
         <SignedIn><section className="flex items-center space-x-3">
-          <Link href={"/analyze-seo"}>
+          <Link prefetch={false} href={"/analyze-seo"}>
             <Button >Analyze SEO</Button>
           </Link>
           
-          <UserButton /></section>
+          <UserButton afterSignOutUrl="/" /></section>
         </SignedIn>
       
         <SignedOut><section className="space-x-3">
