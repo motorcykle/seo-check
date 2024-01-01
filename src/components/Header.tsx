@@ -2,14 +2,20 @@ import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@cl
 import { CheckCheck, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { checkSubscription } from "@/lib/subscription";
+import SubOrBilling from "./SubOrBilling";
 
-export default function Header () {
+export default async function Header () {
+  const isSEOSTAR = await checkSubscription()
+
   return <header className="sticky top-0 z-50 border-b backdrop-blur-lg w-screen overflow-hidden">
     <nav className="mx-auto max-w-7xl p-5 flex items-center justify-between">
       <Link prefetch={false} href={"/"} className="flex items-center font-semibold text-muted-foreground text-2xl">seo-check <CheckCheck className="h-5 w-5 ml-1" /></Link>
         
       
         <SignedIn><section className="flex items-center space-x-3">
+          <SubOrBilling isSEOSTAR={isSEOSTAR} />
+
           <Link prefetch={false} href={"/analyze-seo"}>
             <Button >Analyze SEO</Button>
           </Link>
