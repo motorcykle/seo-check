@@ -4,18 +4,39 @@ import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import SubOrBilling from "./SubOrBilling"
 import { AlertCircle } from "lucide-react"
+import axios from "axios"
 
-export default function AnalyzeForm ({ updateTries, isSEOSTAR, freeTries }: { isSEOSTAR: boolean, freeTries: number | any }) {
+export default function AnalyzeForm ({ updateTries, isSEOSTAR, freeTries }: { isSEOSTAR: boolean, freeTries: number | any, updateTries: () => number | any }) {
   const [tries, setTries] = useState(freeTries)
+  const [webPage, setWebPage] = useState("")
+  const [openAIResponse, setOpenAIResponse] = useState("")
+
+  async function settingTries () {
+    const newTries = await updateTries()
+    setTries(newTries)
+  }
 
   useEffect(() => {
-    setTries(freeTries)
-  }, [freeTries])
+    settingTries()
+  }, [freeTries, openAIResponse])
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    try {
+      await openAICompletion()
+    } catch (error) {
+      console.log(error)
+    }
     const newTries = await updateTries()
     setTries(newTries)
+  }
+
+  async function openAICompletion() {
+    const res = await axios.post("/api/openai", {
+      prompt: webPage
+    })
+
+    setOpenAIResponse(res?.data?.response?.message?.content)
   }
 
   return <section className="space-y-4">
@@ -30,12 +51,16 @@ export default function AnalyzeForm ({ updateTries, isSEOSTAR, freeTries }: { is
 
     <form onSubmit={handleSubmit} className="space-y-2">
       <h2>Place your code below </h2>
-      <Textarea required placeholder="Paste your web page code here... " />
+      <Textarea onChange={(e) => setWebPage(e.target.value)} required placeholder="Paste your web page code here... " />
 
       <Button type="submit">
         Check SEO 🚀
       </Button>
     </form>
+
+    <h3 className=" leading-loose text-2xl">
+      {openAIResponse}
+    </h3>
 
   </section> 
 }
