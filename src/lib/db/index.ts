@@ -12,3 +12,19 @@ export const getFreeTries = async () => {
   const selectResult = await db.select().from(users).where(eq(users.userId, user?.id!));
   return selectResult
 };
+
+export const updateFreeTries = async () => {
+  const user = await currentUser();
+  const [{ freeTries }] = await getFreeTries()
+
+  let updatedTries: number;
+
+  if (freeTries && freeTries > 0) updatedTries = freeTries - 1
+
+  const updatedFreeTries: { freeTries: any | number }[] = await db.update(users)
+    .set({ freeTries: updatedTries! })
+    .where(eq(users.userId, user?.id!))
+    .returning({ freeTries: users.freeTries });
+
+  return updatedFreeTries
+}
