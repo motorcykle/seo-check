@@ -18,7 +18,7 @@ export default function AnalyzeForm ({ updateTries, isSEOSTAR, freeTries }: { is
     setTries(newTries)
   }
 
-  return <section>
+  return <section className="space-y-4">
     {!isSEOSTAR && <div className="p-3 border-2 flex items-center justify-between rounded-xl flex-wrap space-y-2 md:space-y-0">
       <section className="flex items-center space-x-2">
         <AlertCircle />
