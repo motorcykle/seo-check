@@ -9,7 +9,7 @@ export default async function Header () {
   const isSEOSTAR = await checkSubscription()
 
   return <header className="sticky top-0 z-50 border-b backdrop-blur-lg w-screen overflow-hidden">
-    <nav className="mx-auto max-w-7xl p-5 flex items-center justify-between">
+    <nav className="mx-auto max-w-7xl p-5 flex items-center justify-between flex-col md:flex-row space-y-2 md:space-y-0">
       <Link prefetch={false} href={"/"} className="flex items-center font-semibold text-muted-foreground text-2xl">seo-check <CheckCheck className="h-5 w-5 ml-1" /></Link>
         
       
