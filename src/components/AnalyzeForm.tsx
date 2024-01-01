@@ -3,10 +3,11 @@ import { FormEvent, useEffect, useState } from "react"
 import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import SubOrBilling from "./SubOrBilling"
-import { AlertCircle } from "lucide-react"
+import { AlertCircle, Loader } from "lucide-react"
 import axios from "axios"
 
 export default function AnalyzeForm ({ updateTries, isSEOSTAR, freeTries }: { isSEOSTAR: boolean, freeTries: number | any, updateTries: () => number | any }) {
+  const [loading, setLoading] = useState(false)
   const [tries, setTries] = useState(freeTries)
   const [webPage, setWebPage] = useState("")
   const [openAIResponse, setOpenAIResponse] = useState("")
@@ -22,13 +23,16 @@ export default function AnalyzeForm ({ updateTries, isSEOSTAR, freeTries }: { is
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    setLoading(true)
     try {
       await openAICompletion()
     } catch (error) {
       console.log(error)
+    } finally {
+      const newTries = await updateTries()
+      setTries(newTries)
+      setLoading(false)
     }
-    const newTries = await updateTries()
-    setTries(newTries)
   }
 
   async function openAICompletion() {
@@ -53,8 +57,10 @@ export default function AnalyzeForm ({ updateTries, isSEOSTAR, freeTries }: { is
       <h2>Place your code below </h2>
       <Textarea onChange={(e) => setWebPage(e.target.value)} required placeholder="Paste your web page code here... " />
 
-      <Button type="submit">
-        Check SEO 🚀
+      <Button disabled={loading} type="submit">
+        {loading ? <>
+          <Loader className="h-4 w-4 animate-spin" />
+        </> : "Check SEO 🚀"}
       </Button>
     </form>
 

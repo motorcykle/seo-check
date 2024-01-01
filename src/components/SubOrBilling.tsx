@@ -24,7 +24,7 @@ export default function SubOrBilling ({ isSEOSTAR }: { isSEOSTAR: boolean }) {
     }
   }
 
-  return <Button onClick={handleClick} variant={isSEOSTAR ? "outline" : "default"}>
-    {isSEOSTAR ? "Billing" : "Upgrade to S3OST4R 🌟"}
+  return <Button disabled={loading} onClick={handleClick} variant={isSEOSTAR ? "outline" : "default"}>
+    {isSEOSTAR ? "Billing" : (<>Upgrade to S3OST4R <span className={`ml-1 ${loading && "animate-spin"}`}>🌟</span></>)}
   </Button>
 }
