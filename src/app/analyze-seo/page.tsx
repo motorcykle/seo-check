@@ -4,6 +4,8 @@ import { checkSubscription } from "@/lib/subscription";
 
 export default async function AnalyzeSEO () {
   const isSEOSTAR = await checkSubscription()
+  // add call to get tries num
+  // add call to update tries num and you get new num returned 
 
   return <main>
     <section className="content max-w-7xl mx-auto p-5">
